@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="illustratedApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Illustrated Manuscripts</title>
+    <script src="vendors/angular/angular.min.js" charset="utf-8"></script>
+    <script src="vendors/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="vendors/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="scripts/illustratedApp.module.js" charset="utf-8"></script>
+    <script src="scripts/DataService.js" charset="utf-8"></script>
+    <script src="scripts/IllustratedController.js" charset="utf-8"></script>
+
+
+    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+
+
+  </head>
+  <body ng-controller="IllustratedController as illustrated">
+    <nav class="navbar navbar-inverse">
+      <div class=col-md-2>
+        <button type="button" class="btn btn-default btn-lg btn-inverse navbar-btn margin-left" data-toggle="modal" data-target="#myModal">About</button>
+      </div>
+      <div class="col-md-8">
+        <h2 class="text-white text-center">Illustrated Manuscripts</h2>
+      </div>
+      <div class=col-md-2>
+        <a href="/logout" class="btn btn-default btn-lg btn-inverse navbar-btn pull-right margin-right" role="button">Logout</a>
+      </div>
+    </nav>
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">About</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              Illustrated Manuscripts is an application to encourage reading through the use of the visual arts.
+            </p>
+            <p>
+              All sketches have been built in p5, a javascript implementation of the Processing language.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-1 col-lg-1"></div>
+    <div class="col-md-10 col-lg-10">
+      <div class="bookContainer">
+
+        <div class="book">
+          <a href="/neuromancer">
+            <img src="assets/Neuromancer.jpg" />
+            <h3 class="text-center">
+              Neuromancer
+            </h3>
+          </a>
+        </div>
+
+        <div class="book">
+          <a href="/invisiblecities">
+            <img src="assets/InvisibleCities.jpg" />
+            <h3 class="text-center">
+              Invisible Cities
+            </h3>
+          </a>
+        </div>
+
+        <div class="book">
+          <a href="/pleasekillme">
+            <img src="assets/PleaseKillMe.jpg" />
+            <h3 class="text-center">
+              Please Kill Me
+            </h3>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 col-lg-1"></div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+      <h3 class="text-white text-center">Donovan Goertzen, 2016</h3>
+    </nav>
+
+
+  </body>
+</html>

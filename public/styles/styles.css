@@ -1,0 +1,50 @@
+.btn-inverse {
+  background-color: black;
+  color: white;
+}
+
+.margin-left {
+  margin-left: 20px;
+}
+
+.margin-right {
+  margin-right: 20px;
+}
+
+.text-white {
+  color: white;
+}
+
+.bookContainer {
+  padding: 0;
+  margin: 0;
+  margin-top: 30px;
+  list-style: none;
+
+
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.book {
+  padding: 5px;
+  width: 300px;
+}
+
+img {
+  border-radius: 10px 10px;
+  border: 3px solid black;
+}
+
+#neuromancerSketch {
+  margin: 0;
+ display: flex;
+
+ /* This centers our sketch horizontally. */
+ justify-content: center;
+
+ /* This centers our sketch vertically. */
+ align-items: center;
+}
