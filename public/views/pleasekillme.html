@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="illustratedApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Please Kill Me</title>
+  <script language="javascript" type="text/javascript" src="vendors/p5/p5.js"></script>
+  <!-- uncomment lines below to include extra p5 libraries -->
+  <script language="javascript" src="vendors/p5/p5.dom.js"></script>
+  <script language="javascript" src="vendors/p5/p5.sound.js"></script>
+  <script src="scripts/pleaseKillMeSketch.js"></script>
+  <script src="vendors/angular/angular.min.js" charset="utf-8"></script>
+  <script src="vendors/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="vendors/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="scripts/illustratedApp.module.js" charset="utf-8"></script>
+  <script src="scripts/DataService.js" charset="utf-8"></script>
+  <script src="scripts/PleaseKillMeController.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body ng-controller="PleaseKillMeController as killme">
+
+
+  <nav class="navbar navbar-inverse">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <button type="button" class="btn btn-default btn-md btn-inverse navbar-btn pull-left margin-left" data-toggle="modal" data-target="#myModal">About</button>
+      <a href="{{killme.book.book[0].amazonLink}}" class="btn btn-default btn-md btn-inverse navbar-btn pull-left margin-left" role="button">Amazon</a>
+    </div>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <h2 class="text-white text-center"><i>{{killme.book.book[0].bookName}}</i> by {{killme.book.book[0].author}}</h2>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <a href="/index" class="btn btn-default btn-md btn-inverse navbar-btn pull-right margin-right" role="button">Home</a>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">About</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            <i>From Good Reads:</i>
+          </p>
+          <p>
+            {{killme.book.book[0].description}}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="pleaseKillMeSketch">
+
+    </div>
+
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <h3 class="text-white text-center">"{{killme.book.book[0].quote}}"</h3><br />
+  </nav>
+
+
+</body>
+</html>

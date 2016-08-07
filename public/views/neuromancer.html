@@ -1,12 +1,13 @@
-<html>
-<head ng-app="illustratedApp">
+<!DOCTYPE html>
+<html ng-app="illustratedApp">
+<head>
   <meta charset="UTF-8">
   <title>Neuromancer</title>
   <script language="javascript" type="text/javascript" src="vendors/p5/p5.js"></script>
   <!-- uncomment lines below to include extra p5 libraries -->
-  <script language="javascript" src="libraries/p5.dom.js"></script>
+  <script language="javascript" src="vendors/p5/p5.dom.js"></script>
   <!--<script language="javascript" src="libraries/p5.sound.js"></script>-->
-  <script language="javascript" type="text/javascript" src="scripts/neuromancerSketch.js"></script>
+  <script src="scripts/neuromancerSketch.js"></script>
   <script src="vendors/angular/angular.min.js" charset="utf-8"></script>
   <script src="vendors/jquery/dist/jquery.min.js" charset="utf-8"></script>
   <script src="vendors/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
@@ -18,15 +19,18 @@
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body ng-controller="NeuromancerController as neuromancer">
+
+
   <nav class="navbar navbar-inverse">
-    <div class=col-md-2>
-      <button type="button" class="btn btn-default btn-lg btn-inverse navbar-btn margin-left" data-toggle="modal" data-target="#myModal">About</button>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <button type="button" class="btn btn-default btn-md btn-inverse navbar-btn pull-left margin-left" data-toggle="modal" data-target="#myModal">About</button>
+      <a href="{{neuromancer.book.book[0].amazonLink}}" class="btn btn-default btn-md btn-inverse navbar-btn pull-left margin-left" role="button">Amazon</a>
     </div>
-    <div class="col-md-8">
-      <h2 class="text-white text-center">Neuromancer</h2>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <h2 class="text-white text-center"><i>{{neuromancer.book.book[0].bookName}}</i> by {{neuromancer.book.book[0].author}}</h2>
     </div>
-    <div class=col-md-2>
-      <a href="/index" class="btn btn-default btn-lg btn-inverse navbar-btn pull-right margin-right" role="button">Home</a>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <a href="/index" class="btn btn-default btn-md btn-inverse navbar-btn pull-right margin-right" role="button">Home</a>
     </div>
   </nav>
 
@@ -44,7 +48,7 @@
             <i>From Wikipedia:</i>
           </p>
           <p>
-            Neuromancer is a 1984 novel by William Gibson, a seminal work in the cyberpunk genre and the first winner of the science-fiction "triple crown"—the Nebula Award, the Philip K. Dick Award, and the Hugo Award. It was Gibson's debut novel and the beginning of the Sprawl trilogy. The novel tells the story of a washed-up computer hacker hired by a mysterious employer to pull off the ultimate hack.
+            {{neuromancer.book.book[0].description}}
           </p>
         </div>
         <div class="modal-footer">
@@ -57,6 +61,34 @@
     <div id="neuromancerSketch">
 
     </div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <h3 class="text-white text-center">"{{neuromancer.book.book[0].quote}}"</h3>
+
+    <div id="neuromancerSliderRed" class="col-sm-3 col-md-3 col-lg-3">
+      <p class="text-white text-center">
+        Red
+      </p>
+    </div>
+    <div id="neuromancerSliderGreen" class="col-sm-3 col-md-3 col-lg-3">
+      <p class="text-white text-center">
+        Green
+      </p>
+    </div>
+
+    <div id="neuromancerSliderBlue" class="col-sm-3 col-md-3 col-lg-3">
+      <p class="text-white text-center">
+        Blue
+      </p>
+    </div>
+    <div id="neuromancerButtonSave" class="col-sm-1 col-md-1 col-lg-1">
+
+    </div>
+    <div id="neuromancerButtonLoad" class="col-sm-1 col-md-1 col-lg-1">
+
+    </div>
+
+  </nav>
+
 
 </body>
 </html>

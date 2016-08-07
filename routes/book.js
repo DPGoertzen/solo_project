@@ -6,6 +6,18 @@ router.get('/createBook', function(request, response) {
   response.sendFile(path.join(__dirname, '../public/views/createBook.html'));
 });
 
+router.get('/findBook/:name', function(request, response){
+  Book.find({bookName: request.params.name}, function(err, currentBook){
+    if(err){
+      response.sendStatus(500);
+    }else{
+      console.log('sending back book', currentBook);
+      response.send(currentBook);
+    }
+  })
+})
+
+
 router.post('/createBook', function(request, response){
   console.log('Creating data');
   var data = request.body;
