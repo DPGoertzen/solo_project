@@ -40,6 +40,7 @@ img {
 
 #neuromancerSketch, #invisibleCitiesSketch, #pleaseKillMeSketch {
   margin: 0;
+  border-radius: 10px 10px;
  display: flex;
 
  /* This centers our sketch horizontally. */
@@ -47,4 +48,8 @@ img {
 
  /* This centers our sketch vertically. */
  align-items: center;
+}
+
+#selecter {
+  margin-bottom: 10px;
 }
