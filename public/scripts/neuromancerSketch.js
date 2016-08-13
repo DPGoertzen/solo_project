@@ -55,7 +55,7 @@ function saveInfo(){
   data.sliderGreen = sliderGreen.value();
   data.sliderBlue = sliderBlue.value();
   console.log(data);
-  httpPost('/addSettings', data, finished);
+  httpPost('/addSettingsNeuromancer', data, finished);
 
   function finished(response) {
     console.log(response);

@@ -7,7 +7,9 @@ var UserSchema = new Schema({
   password: {type: String, required: true},
   sliderRed: {type: Number},
   sliderGreen: {type: Number},
-  sliderBlue: {type: Number}
+  sliderBlue: {type: Number},
+  treeWidth: {type: Number},
+  selecterAngle: {type: Number}
 });
 
 UserSchema.pre('save', function(next){

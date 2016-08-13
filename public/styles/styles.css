@@ -50,6 +50,7 @@ img {
  align-items: center;
 }
 
-#selecter {
+#selecter, #checkbox, #treeWidth, #selecterAngle {
+  color: white;
   margin-bottom: 10px;
 }

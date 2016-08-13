@@ -35,7 +35,7 @@ router.get('/retrieveSettings', function(request, response){
 })
 
 
-router.post('/addSettings', function(request, response){
+router.post('/addSettingsNeuromancer', function(request, response){
   var user = request.user;
   var data = request.body;
   User.findById(user._id, function(err, user){
@@ -46,6 +46,25 @@ router.post('/addSettings', function(request, response){
     user.sliderRed = data.sliderRed;
     user.sliderGreen = data.sliderGreen;
     user.sliderBlue = data.sliderBlue;
+    user.save(function(err){
+      if(err){
+        console.log(err);
+      }
+    });
+  });
+
+});
+
+router.post('/addSettingsInvisibleCities', function(request, response){
+  var user = request.user;
+  var data = request.body;
+  User.findById(user._id, function(err, user){
+    if(err){
+      console.log(err);
+    }
+    console.log(request.body);
+    user.treeWidth = data.treeWidth;
+    user.selecterAngle = data.selecterAngle;
     user.save(function(err){
       if(err){
         console.log(err);
