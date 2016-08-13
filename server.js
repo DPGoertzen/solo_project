@@ -12,9 +12,15 @@ var register = require('./routes/register');
 var index = require('./routes/index');
 var book = require('./routes/book');
 
+var mongoURI;
+
 var app = express();
 
-var mongoURI = 'mongodb://localhost:27017/illustrated_passport';
+if(process.env.MONGODB_URI != undefined){
+  mongoURI = process.env.MONGODB_URI
+} else {
+  mongoURI = 'mongodb://localhost:27017/illustrated_passport';
+}
 
 var MongoDB = mongoose.connect(mongoURI).connection;
 
