@@ -41,7 +41,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">About</h4>
+          <h4 class="modal-title" id="myModalLabel">Neuromancer</h4>
         </div>
         <div class="modal-body">
           <p>
@@ -49,6 +49,12 @@
           </p>
           <p>
             {{neuromancer.book.book[0].description}}
+          </p>
+          <p>
+            <i>Artist's Statement:</i>
+          </p>
+          <p>
+            {{neuromancer.book.book[0].artistStatement}}
           </p>
         </div>
         <div class="modal-footer">
@@ -84,6 +90,9 @@
 
     </div>
     <div id="neuromancerButtonLoad" class="col-sm-1 col-md-1 col-lg-1">
+
+    </div>
+    <div id="saveImage" class="col-sm-1 col-md-1 col-lg-1">
 
     </div>
 

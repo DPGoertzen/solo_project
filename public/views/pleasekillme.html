@@ -42,7 +42,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">About</h4>
+          <h4 class="modal-title" id="myModalLabel">Please Kill Me</h4>
         </div>
         <div class="modal-body">
           <p>
@@ -50,6 +50,12 @@
           </p>
           <p>
             {{killme.book.book[0].description}}
+          </p>
+          <p>
+            <i>Artist's Statement:</i>
+          </p>
+          <p>
+            {{killme.book.book[0].artistStatement}}
           </p>
         </div>
         <div class="modal-footer">
@@ -65,10 +71,14 @@
 
   <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <h3 class="text-white text-center">"{{killme.book.book[0].quote}}"</h3><br />
-    <div class="col-sm-5 col-md-5 col-lg-5">
+    <div class="col-sm-4 col-md-4 col-lg-4">
 
     </div>
     <div id="selecter" class="col-sm-4 col-md-4 col-lg-4">
+
+    </div>
+
+    <div id="saveImage" class="col-sm-1 col-md-1 col-lg-1">
 
     </div>
     <div class="col-sm-3 col-md-3 col-lg-3">

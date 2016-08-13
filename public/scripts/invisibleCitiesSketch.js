@@ -1,19 +1,19 @@
 var seedArray = [];
 var seed = [];
 var tree;
-// var initialStrokeWeight = 12;
 // Initial growth rate
 var initGrowth = 1.2;
 var selecterAngle;
 var newTreeButton;
 var treeWidth;
-var buttonSave, buttonLoad;
+var buttonSave, buttonLoad, buttonSaveImage;
 var howManyTrees = 1;
 
 function setup() {
   // creates our canvas and interactive inputs
   myCanvas = createCanvas( 1000, 500);
   myCanvas.parent('invisibleCitiesSketch');
+
   selecterAngle = createSlider(0, 4, 0.75, 0.25);
   selecterAngle.parent('selecterAngle');
   newTreeButton = createButton('New Tree');
@@ -24,11 +24,12 @@ function setup() {
   buttonSave = createButton('Save');
   buttonSave.parent('InvisibleCitiesButtonSave');
   buttonSave.mousePressed(saveInfo);
-
   buttonLoad = createButton('Load');
   buttonLoad.parent('InvisibleCitiesButtonLoad');
   buttonLoad.mousePressed(loadInfo);
-
+  buttonSaveImage = createButton('Save Image');
+  buttonSaveImage.parent('saveImage');
+  buttonSaveImage.mousePressed(saveOurImage);
 
   // Create an initial tree
   tree = new Tree(initGrowth, -HALF_PI+(random(-0.2, 0.2)), null, treeWidth.value());
@@ -38,37 +39,38 @@ function setup() {
 }
 
 function draw() {
+  // the combination of a low alpha (opacity) fill combined with drawing
+  // a rectangle the size of our screen creates our blur and fade.
    fill(0,15);
    rect(0,0,width,height);
 
+  // every 40 frames, make a new semi-transluscent branch tree.
     if(frameCount % 40 == 0){
        stroke(255, 125);
        branch(random(50, 950), height, height-random(250, 450), radians(270));
     }
     stroke(215);
 
-  if(frameCount%500 == 0){
+  // every 400 frames, clear all trees, make a new tree, and reset how many trees onscreen to 1.
+  if(frameCount % 400 == 0){
     howManyTrees = 1;
     seedArray = [];
     tree = new Tree(initGrowth, -HALF_PI+(random(-0.25, 0.25)),null, treeWidth.value());
     seedArray.push(new Seed(tree, random(.25*width, .75*width), height));
   }
 
+  // on each draw cycle, check to see if the tree can reproduce
+  // also grow and display the tree
   for (var i=0; i<seedArray.length; i++) {
     seedArray[i].reproduce();
-  }
-
-  for (var i=0; i<seedArray.length; i++) {
     seedArray[i].grow();
     seedArray[i].display();
   }
 
-  // Display seed sizes -- unnecessary
-  // for (var i=0; i<seedArray.length; i++) {
-  //   console.log(seedArray[i].getNbrBlades() + " ");
-  // }
 }
 
+// functionality for our background branches, which are generated all at once,
+// which is a much less taxing implementation of a tree (also more naturalistic)
 function branch(x, y, s, a){
   strokeWeight(s*.05);
   a+=radians(1.1*random(-10,10));
@@ -99,6 +101,7 @@ function newTreeButtonClicked() {
 
 }
 
+//save our sliders and send them through to our settings route and on to the db
 function saveInfo(){
   var data = {};
   data.treeWidth = treeWidth.value();
@@ -110,6 +113,7 @@ function saveInfo(){
   }
 }
 
+// retrieve our saved slider values
 function loadInfo(){
   var params = {};
   httpGet('/retrieveSettings', params, finished);
@@ -120,6 +124,10 @@ function loadInfo(){
     selecterAngle.value(ourData.selecterAngle);
     console.log(JSON.parse(response));
   }
+}
+
+function saveOurImage(){
+  saveCanvas(myCanvas, 'InvisibleCities', 'jpg');
 }
 
 
@@ -144,45 +152,30 @@ Seed.prototype.grow = function() {
     this.tree.grow();
   }
 
-Seed.prototype.isAlive = function() {
-    return this.tree.life;
-  }
-
-// unnecessary -- takes up processing overhead
-// Seed.prototype.getNbrBlades = function() {
-//     return this.tree.getNbrBranches();
-// }
-
-
+// tree constructor
 function Tree(growth, angle, parent, isw) {
 
-  // Tree parent;
+  // initialize variables
   this.parent = parent;
   this.growth = growth;
   this.angle = angle;
   this.children = [];
 
-
   this.size = null;
-  this.age = null;
   this.isw = isw;
-
   this.maxSize = 100;
-  this.maxAge = 600; // about 10 seconds
-  this.life = true;
   this.hasReproduced = false;
 
-  // -------------------------------------------------------- parent constructor
+  // constructor for the initial branch (i.e. parent)
   if(growth && angle && isw) {
     this.isw = isw;
     this.growth = growth;
     this.angle = angle;
     this.parent = null;
     this.size = 0;
-    this.age = 0;
   }
 
-  // -------------------------------------------------------- children constructor
+  // This is the constructor for child branches
   if(angle && parent && isw) {
     this.isw = 0.5 * parent.isw
     this.growth = random(0.4, 0.8) * parent.growth;
@@ -191,32 +184,25 @@ function Tree(growth, angle, parent, isw) {
     this.parent = parent;
     this.parent.children.push(this);
     this.size = 0;
-    this.age = 0;
   }
 }
 
-// -------------------------------------------------------- grow()
+// this function is how we grow our trees
 Tree.prototype.grow = function() {
 
-  // --------------------------------------- growth stops if maximum size is reached
+  // if our tree is bigger than maxSize, stop growing
   if (this.size > this.maxSize) {
     this.growth = 0;
   }
 
-  // --------------------------------------------- life stops after a while
-  if (this.age > this.maxAge) {
-    this.life = false;
-  }
-  // -------------------------------------------------------- life pass
   this.size += this.growth;
-  this.age += 1;
-
+  // iterate through our children recursively
   for (var i = 0; i<this.children.length; i++) {
     this.children[i].grow();
   }
 }
 
-// -------------------------------------------------------- display()
+// displays our tree
 Tree.prototype.display = function(x, y) {
   var endX = x + (cos(this.angle)*this.size);
   var endY = y + (sin(this.angle)*this.size);
@@ -228,27 +214,18 @@ Tree.prototype.display = function(x, y) {
   }
 }
 
-// -------------------------------------------------------- reproduce
+// This is how our tree "reproduces" and creates new branches
 Tree.prototype.reproduce = function() {
-  // Must be a certain size before the branch can reproduce
-  // Alos limit the number of children to afunction expontial growth
+  // If our branch is big enough to reproduce,
+  // and it has less than 8 children, then create a new branch
+  // 8 is the absolute upper limit before our frame rate plummets.
   if ( this.size > 50 &&  this.children.length < 8) {
     var direction = (random(0, 2))*2-1;
     this.children.push(new Tree(null,-HALF_PI+(random(-selecterAngle.value(), selecterAngle.value())*direction), this, this.isw));
   }
 
-  // ---------------- recursive !
-
+  //  recursively reproduce
   for (var i=0; i<this.children.length; i++) {
     this.children[i].reproduce();
   }
 }
-
-// -------------- the number of branches in the tree
-// unnecessary -- takes up processing overhead
-// Tree.prototype.getNbrBranches = function() {
-//   var n = this.children.length;
-//   for (var i=0; i<this.children.length; i++)
-//     n += this.children[i].getNbrBranches();
-//   return n;
-// }
