@@ -10,7 +10,7 @@ var User = require('./models/User.js');
 var login = require('./routes/login.js');
 var register = require('./routes/register.js');
 var index = require('./routes/index.js');
-var book = require('./routes/Book.js');
+var book = require('./routes/book.js');
 
 var mongoURI;
 
