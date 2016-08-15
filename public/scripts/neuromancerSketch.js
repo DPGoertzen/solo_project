@@ -31,11 +31,11 @@ function setup() {
   image(img, 0, 0);
   image(img2, 0, 5);
   //create our user interactivity
-  buttonSave = createButton('Save');
+  buttonSave = createButton('Save Settings');
   buttonSave.parent('neuromancerButtonSave');
   buttonSave.mousePressed(saveInfo);
 
-  buttonLoad = createButton('Load');
+  buttonLoad = createButton('Load Settings');
   buttonLoad.parent('neuromancerButtonLoad');
   buttonLoad.mousePressed(loadInfo);
 

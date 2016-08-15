@@ -19,12 +19,12 @@ function setup() {
   newTreeButton = createButton('New Tree');
   newTreeButton.parent('newTreeButton');
   newTreeButton.mousePressed(newTreeButtonClicked);
-  treeWidth = createSlider(1, 24, 12, 1);
+  treeWidth = createSlider(1, 12, 6, 1);
   treeWidth.parent('treeWidth');
-  buttonSave = createButton('Save');
+  buttonSave = createButton('Save Settings');
   buttonSave.parent('InvisibleCitiesButtonSave');
   buttonSave.mousePressed(saveInfo);
-  buttonLoad = createButton('Load');
+  buttonLoad = createButton('Load Settings');
   buttonLoad.parent('InvisibleCitiesButtonLoad');
   buttonLoad.mousePressed(loadInfo);
   buttonSaveImage = createButton('Save Image');
@@ -52,7 +52,7 @@ function draw() {
     stroke(215);
 
   // every 400 frames, clear all trees, make a new tree, and reset how many trees onscreen to 1.
-  if(frameCount % 400 == 0){
+  if(frameCount % 300 == 0){
     howManyTrees = 1;
     seedArray = [];
     tree = new Tree(initGrowth, -HALF_PI+(random(-0.25, 0.25)),null, treeWidth.value());

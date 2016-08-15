@@ -50,7 +50,30 @@ img {
  align-items: center;
 }
 
-#selecter, #checkbox, #treeWidth, #selecterAngle {
+#neuromancerButtonSave, #neuromancerButtonLoad, #neuromancerSliderRed, #neuromancerSliderGreen, #neuromancerSliderBlue, #checkbox, #treeWidth, #selecterAngle {
   color: white;
   margin-bottom: 10px;
+}
+
+#selecter{
+  margin-bottom: 30px;
+}
+
+.imageDescription {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(40, 40, 40, 0.72);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  padding-left: 5px;
+  border-radius: 5px 5px;
+}
+
+.imgWrap:hover .imageDescription {
+  visibility: visible;
+  opacity: 1;
 }
