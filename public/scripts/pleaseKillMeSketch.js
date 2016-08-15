@@ -104,10 +104,10 @@ function draw() {
 
   // create our semi-transluscent ellipses based on our current color scheme
   noStroke();
-  fill(currentSongSettings.red, currentSongSettings.green, currentSongSettings.blue, 6);
+  fill(currentSongSettings.red, currentSongSettings.green, currentSongSettings.blue, 25);
   // iterate a bunch of times, each time we loop through, we're making our circles
   // less transparent
-  for(var n = 0; n < 10; n++){
+  // for(var n = 0; n < 10; n++){
     // iterates again, this time generating a larger circle as we iterate.
     for(var k = 5; k <= 12; k++){
 
@@ -115,7 +115,7 @@ function draw() {
        ellipse(0,0,70*k*volume,70*k*volume);
        ellipse(0,0,90*k*volume,90*k*volume);
     }
-  }
+  // }
 
   // prevents the flashing from happening at the very beginning
   if(currentSongSettings.alpha !=0){
